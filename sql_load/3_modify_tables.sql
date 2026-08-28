@@ -1,42 +1,42 @@
-/* ⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
-Database Load Issues (follow if receiving permission denied when running SQL code below)
+/*
+===============================================================================
+Database Load & Data Import Script
+===============================================================================
+This script loads data from CSV files into the created PostgreSQL tables.
 
-NOTE: If you are having issues with permissions. And you get error: 
+INSTRUCTIONS:
+1. Download the dataset CSV files and place them inside a `csv_files/` directory.
+2. Replace '[PATH_TO_CSV_FILES]' below with the absolute path on your system.
+   Example (Windows): 'C:\projects\SQL_Job_Analysis_2023\csv_files\company_dim.csv'
+   Example (Mac/Linux): '/home/user/SQL_Job_Analysis_2023/csv_files/company_dim.csv'
 
-'could not open file "[your file path]\job_postings_fact.csv" for reading: Permission denied.'
+NOTE: If you experience permission errors with the standard `COPY` command:
+- Use the psql CLI `\copy` command instead (runs client-side without server permission restrictions):
 
-1. Open pgAdmin
-2. In Object Explorer (left-hand pane), navigate to `sql_course` database
-3. Right-click `sql_course` and select `PSQL Tool`
-    - This opens a terminal window to write the following code
-4. Get the absolute file path of your csv files
-    1. Find path by right-clicking a CSV file in VS Code and selecting “Copy Path”
-5. Paste the following into `PSQL Tool`, (with the CORRECT file path)
-
-\copy company_dim FROM '[Insert File Path]/company_dim.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', ENCODING 'UTF8');
-
-\copy skills_dim FROM '[Insert File Path]/skills_dim.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', ENCODING 'UTF8');
-
-\copy job_postings_fact FROM '[Insert File Path]/job_postings_fact.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', ENCODING 'UTF8');
-
-\copy skills_job_dim FROM '[Insert File Path]/skills_job_dim.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', ENCODING 'UTF8');
-
+    \copy company_dim FROM '[PATH_TO_CSV_FILES]/company_dim.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', ENCODING 'UTF8');
+    \copy skills_dim FROM '[PATH_TO_CSV_FILES]/skills_dim.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', ENCODING 'UTF8');
+    \copy job_postings_fact FROM '[PATH_TO_CSV_FILES]/job_postings_fact.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', ENCODING 'UTF8');
+    \copy skills_job_dim FROM '[PATH_TO_CSV_FILES]/skills_job_dim.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',', ENCODING 'UTF8');
+===============================================================================
 */
 
--- NOTE: This has been updated from the video to fix issues with encoding
-
+-- Bulk load company dimension data
 COPY company_dim
-FROM 'D:\projects\SQL\dataAnalyticsCourse\csv_files\company_dim.csv'
+FROM '[PATH_TO_CSV_FILES]/company_dim.csv'
 WITH (FORMAT csv, HEADER true, DELIMITER ',', ENCODING 'UTF8');
 
+-- Bulk load skills dimension data
 COPY skills_dim
-FROM 'D:\projects\SQL\dataAnalyticsCourse\csv_files\skills_dim.csv'
+FROM '[PATH_TO_CSV_FILES]/skills_dim.csv'
 WITH (FORMAT csv, HEADER true, DELIMITER ',', ENCODING 'UTF8');
 
+-- Bulk load job postings fact table
 COPY job_postings_fact
-FROM 'D:\projects\SQL\dataAnalyticsCourse\csv_files\job_postings_fact.csv'
+FROM '[PATH_TO_CSV_FILES]/job_postings_fact.csv'
 WITH (FORMAT csv, HEADER true, DELIMITER ',', ENCODING 'UTF8');
 
+-- Bulk load skills-to-job mapping bridge table
 COPY skills_job_dim
-FROM 'D:\projects\SQL\dataAnalyticsCourse\csv_files\skills_job_dim.csv'
+FROM '[PATH_TO_CSV_FILES]/skills_job_dim.csv'
 WITH (FORMAT csv, HEADER true, DELIMITER ',', ENCODING 'UTF8');
+

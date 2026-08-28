@@ -309,14 +309,18 @@ LIMIT 10;
 git clone https://github.com/Amr866/SQL_Job_Analysis_2023.git
 ```
 
-### 2. Set Up the Database & Tables
+### 2. Download the Dataset
+1. Download the CSV files (`company_dim.csv`, `skills_dim.csv`, `job_postings_fact.csv`, `skills_job_dim.csv`) from [Luke Barousse's SQL Project Data Repository](https://github.com/lukebarousse/SQL_Project_Data_Job_Analysis).
+2. Place them into a `csv_files/` directory in the project root.
+
+### 3. Set Up the Database & Tables
 Execute the setup scripts in sequential order:
 1. Run [`sql_load/1_create_database.sql`](./sql_load/1_create_database.sql) to initialize the database.
 2. Run [`sql_load/2_create_tables.sql`](./sql_load/2_create_tables.sql) to create table schemas.
-3. Run [`sql_load/3_modify_tables.sql`](./sql_load/3_modify_tables.sql) to load the CSV dataset.
+3. Run [`sql_load/3_modify_tables.sql`](./sql_load/3_modify_tables.sql) (updating the file paths to your local `csv_files/` folder) to load data.
 
-### 3. Run Analysis Queries
-Open any query file in [`analysis/`](./analysis/) to reproduce the analysis.
+### 4. Run Analysis Queries
+Open and execute any query file in [`analysis/`](./analysis/) to reproduce the analysis.
 
 ---
 
@@ -330,7 +334,7 @@ Open any query file in [`analysis/`](./analysis/) to reproduce the analysis.
 
 ## 📚 Data Source & Acknowledgments
 
-* Dataset provided through **Luke Barousse's SQL for Data Analytics** course.
+* Dataset provided through [Luke Barousse's SQL for Data Analytics](https://lukebarousse.com/sql) course and [Data Job Analysis Repository](https://github.com/lukebarousse/SQL_Project_Data_Job_Analysis).
 
 ---
 
