@@ -22,7 +22,7 @@ SELECT *
 FROM skills_wanted
 ORDER BY skills_count DESC
 LIMIT 5;
--- well the resualts for SOFTWARE ENGINEER role is:
+-- well the results for SOFTWARE ENGINEER role is:
 /*
  [
  {
